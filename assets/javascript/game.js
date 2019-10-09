@@ -5,10 +5,17 @@ var gameState = {
   carParts: [
     'alternator', 'axle', 'exhaust', 'intake', 'coilpack', 'gauges', 'harness', 'fender', 'trunk', 'hood', 'door', 'solenoid', 'relay', 'fuse', 'wheel', 'tire', 'bearing', 'transmission', 'differential', 'frame', 'mount', 'motor', 'hub', 'knuckle', 'rack', 'pinion', 'piston', 'rod', 'cam', 'sensor', 'bumper', 'brakes', 'rotor', 'caliper', 'headlight', 'airbox',
   ],
+  // array for guessed letters
   guessedLetters: [],
+  // array for chosen word to make processing easier
   theWordArray: [],
+  // array to be filled in by guessing letters
+  fillInArray: [],
+  // property for word to be chosen
   theWord: "",
+  // base number of guesses
   guesses: 7,
+  // win counter
   wins: 0,
   pickWord: function () {
     // Gets list length
@@ -36,6 +43,13 @@ var gameState = {
     });
   },
 
+  // creates an array of underscores
+  setFillInArray(arrayLength){
+    for (let i = 0; i < arrayLength; i++) {
+      this.fillInArray.push('_');
+    }
+  },
+
   // Sets the gameState
   init() {
     // picks the word
@@ -44,6 +58,9 @@ var gameState = {
     this.addGuesses();
     // creates the array for theWord
     this.setWordArray(this.theWord);
+    // creates the array for correctly guessed words
+    this.setFillInArray(this.theWordArray.length);
+    // console.log(this.fillInArray);
   }
 
 }
