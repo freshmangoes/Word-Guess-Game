@@ -139,8 +139,4 @@ var gameState = {
 }
 
 // Debug statement, making sure gameState is picking a word
-
-// gameState.pickWord();
-// gameState.addGuesses();
-// gameState.setWordArray(gameState.theWord);
 gameState.init();
