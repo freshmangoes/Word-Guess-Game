@@ -1,4 +1,4 @@
-// aux
+// auxiliary functions
 function getIndex(array, value) {
   // array to store index values
   var indicies = [];
@@ -137,6 +137,12 @@ var gameState = {
   }
 
 }
+
+// get elements to be modified and set them to variables
+var targetWord = document.getElementById('target-word')
+var fillArrayDisplay = document.getElementById('fill-display');
+var winCount = document.getElementById('win-count');
+var guessArrayDisplay = document.getElementById('guess-display');
 
 // onkeyup event to capture key input
 document.onkeyup = function(event) {
