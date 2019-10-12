@@ -161,10 +161,23 @@ winCount.innerHTML = 'Win Count: ' + gameState.wins;
 
 // onkeyup event to capture key input
 document.onkeyup = function(event) {
+
   var guessCode = event.keyCode;
-  var guess = String.fromCharCode(guessCode).toLowerCase();
-  console.log('Guess: ', guess);
-  gameState.addGuess(guess);
+  // if statement to make sure a letter was pressed
+  // if a letter is pressed, update gameState and HTML
+  if(guessCode >= 65 && guessCode <= 90) {
+    console.log('input was a letter');
+    var guess = String.fromCharCode(guessCode).toLowerCase();
+    console.log('Guess: ', guess);
+    gameState.addGuess(guess);
+  
+    // updates HTML after pressing a key
+    fillArrayDisplay.innerHTML = gameState.fillInArray.join(' ');
+    guessArrayDisplay.innerHTML = gameState.guessedLetters.join(', ');
+  // do not update gameState and HTML if letter was not pressed
+  } else {
+    console.log('input was not a letter');
+  }
 }
 
 // Debug statement, making sure gameState is picking a word
