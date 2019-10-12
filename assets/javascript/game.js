@@ -69,7 +69,8 @@ var gameState = {
     // if correctIndicies has more than one index
     if(correctIndicies.length != 1) {
       // iterate
-      for(var i = 0; i < correctIndicies.length - 1; i++){
+      for(var i = 0; i < correctIndicies.length; i++){
+        console.log('setFillArray - correctIndicies: ', correctIndicies);
         // get the index by taking the value of the current iteration
         var index = correctIndicies[i];
         // set fill array at that index to the answer array at that index
@@ -107,6 +108,8 @@ var gameState = {
       this.guesses = this.guesses - 1;
       console.log('Remaining guesses: ', this.guesses);
     }
+    console.log('gameState.fillInArray: ', gameState.fillInArray);
+    console.log('gameState.guessedLetters: ', gameState.guessedLetters);
   },
 
   checkWinCondition() { 
@@ -138,16 +141,30 @@ var gameState = {
 
 }
 
+// Initialize gameState
+gameState.init();
+
 // get elements to be modified and set them to variables
-var targetWord = document.getElementById('target-word')
+var targetWord = document.getElementById('target-word');
 var fillArrayDisplay = document.getElementById('fill-display');
 var winCount = document.getElementById('win-count');
 var guessArrayDisplay = document.getElementById('guess-display');
 
+// populating HTML with gameState data
+targetWord.innerHTML = gameState.theWord;
+
+fillArrayDisplay.innerHTML = gameState.fillInArray.join(' ');
+
+guessArrayDisplay.innerHTML = gameState.guessedLetters.join(', ');
+
+winCount.innerHTML = 'Win Count: ' + gameState.wins;
+
 // onkeyup event to capture key input
 document.onkeyup = function(event) {
-
+  var guessCode = event.keyCode;
+  var guess = String.fromCharCode(guessCode).toLowerCase();
+  console.log('Guess: ', guess);
+  gameState.addGuess(guess);
 }
 
 // Debug statement, making sure gameState is picking a word
-gameState.init();
