@@ -37,7 +37,7 @@ var gameState = {
     // Picks index between 0 and list length
     var index = Math.floor(Math.random() * (listLength));
     // Sets result to the found index in the list
-    var result = this.carParts[index];
+    var result = this.carParts[index].toUpperCase();
     // Sets theWord to the result
     this.theWord = result;
   },
@@ -54,7 +54,7 @@ var gameState = {
     // splits a word into individual characters
     // pushes them to theWordArray
     word.split('').forEach(c => {
-      this.theWordArray.push(c);
+      this.theWordArray.push(c.toUpperCase());
     });
   },
 
@@ -100,8 +100,8 @@ var gameState = {
       // subtract one from guesses
       this.guesses = this.guesses - 1;
       console.log('Remaining guesses: ', this.guesses);
-
-      // case for incorrect guess
+      this.guessedLetters.sort();
+      // case for incorrect guesses
     } else {
       console.log('Chosen word does not contain this character:', letter);
       // push letter to guessed array
@@ -110,9 +110,12 @@ var gameState = {
       // subtract one from guesses
       this.guesses = this.guesses - 1;
       console.log('Remaining guesses: ', this.guesses);
+      this.guessedLetters.sort();
     }
+
     console.log('gameState.fillInArray: ', gameState.fillInArray);
     console.log('gameState.guessedLetters: ', gameState.guessedLetters);
+
   },
 
   checkWinCondition() {
@@ -139,7 +142,7 @@ var gameState = {
     console.log('Game word array: ', this.theWordArray);
     // creates the array for correctly guessed words
     this.initFillArray(this.theWordArray.length);
-    console.log('Fill in array: ', this.fillInArray);    
+    console.log('Fill in array: ', this.fillInArray);
   },
 
   // resets the game upon a win
@@ -174,23 +177,23 @@ var gameState = {
       if (guessCode >= 65 && guessCode <= 90) {
         console.log('input was a letter');
         // forces lower case for consistency
-        var guess = String.fromCharCode(guessCode).toLowerCase();
+        var guess = String.fromCharCode(guessCode).toUpperCase();
         console.log('Guess: ', guess);
         // handles the guessed letter
         gameState.addGuess(guess);
 
         // updates HTML after pressing a key, has to use gameState because it is a nested function
         fillArrayDisplay.innerHTML = gameState.fillInArray.join(' ');
-        var guessedLettersString = gameState.guessedLetters.join(', ');
+        var guessedLettersString = gameState.guessedLetters.join(' ').toUpperCase();
         guessArrayDisplay.innerHTML = guessedLettersString;
-        guessCount.innerHTML = 'Remaining guesses: ' + gameState.guesses;
+        guessCount.innerHTML = gameState.guesses;
 
         if (gameState.guesses >= 1 && gameState.checkWinCondition()) {
           gameState.wins++;
           alert('Winner winner chicken dinner!')
           alert('The word was ' + gameState.theWord);
           gameState.newGame();
-        }else if(gameState.guesses < 1 && !gameState.checkWinCondition()) {
+        } else if (gameState.guesses < 1 && !gameState.checkWinCondition()) {
           alert('Oh no, you lost :(')
           gameState.wins = 0;
           gameState.newGame();
@@ -200,7 +203,6 @@ var gameState = {
       } else {
         console.log('input was not a letter');
       }
-
       console.log('Win condition: ', gameState.checkWinCondition());
     }
   },
