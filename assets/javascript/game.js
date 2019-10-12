@@ -144,8 +144,11 @@ var gameState = {
 
   // resets the game upon a win
   newGame() {
+    // reinitializes game
     this.init();
+    // empties guessedLetters array
     this.guessedLetters = [];
+    // updates gameState
     this.update();
   },
 
@@ -159,8 +162,8 @@ var gameState = {
     // populating HTML with gameState data
     fillArrayDisplay.innerHTML = this.fillInArray.join(' ');
     guessArrayDisplay.innerHTML = this.guessedLetters.join(', ');
-    winCount.innerHTML = 'Win Count: ' + this.wins;
-    guessCount.innerHTML = 'Guesses Left: ' + this.guesses;
+    winCount.innerHTML = this.wins;
+    guessCount.innerHTML = this.guesses;
 
     // onkeyup event to capture key input
     document.onkeyup = function (event) {
@@ -178,7 +181,8 @@ var gameState = {
 
         // updates HTML after pressing a key, has to use gameState because it is a nested function
         fillArrayDisplay.innerHTML = gameState.fillInArray.join(' ');
-        guessArrayDisplay.innerHTML = 'Guessed letters: ' + gameState.guessedLetters.join(', ');
+        var guessedLettersString = gameState.guessedLetters.join(', ');
+        guessArrayDisplay.innerHTML = guessedLettersString;
         guessCount.innerHTML = 'Remaining guesses: ' + gameState.guesses;
 
         if (gameState.guesses >= 1 && gameState.checkWinCondition()) {
@@ -197,12 +201,6 @@ var gameState = {
         console.log('input was not a letter');
       }
 
-      //--------------------------------------------
-      // update win condition logic. make sure that 
-      //there is lose condition logic too! look at
-      // functions newGame(), the if statement below
-      // and initialization functions
-      //--------------------------------------------
       console.log('Win condition: ', gameState.checkWinCondition());
     }
   },
