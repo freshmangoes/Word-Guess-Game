@@ -31,7 +31,7 @@ var gameState = {
   guesses: 7,
   // win counter
   wins: 0,
-  pickWord: function () {
+  initWord: function () {
     // Gets list length
     var listLength = this.carParts.length - 1;
     // Picks index between 0 and list length
@@ -45,7 +45,6 @@ var gameState = {
   // Adds more guesses based off of the length of the goal word
   initGuesses() {
     this.guesses += this.theWord.length;
-    console.log('Remaining guesses:', this.guesses);
   },
 
   // populates theWordArray 
@@ -96,6 +95,7 @@ var gameState = {
       this.setFillArray(letter, this.theWordArray, this.fillInArray);
       // subtract one from guesses
       this.guesses = this.guesses - 1;
+      console.log('Remaining guesses: ', this.guesses);
       
     // case for incorrect guess
     } else {
@@ -105,20 +105,35 @@ var gameState = {
       console.log('Guessed letters: ', this.guessedLetters);
       // subtract one from guesses
       this.guesses = this.guesses - 1;
+      console.log('Remaining guesses: ', this.guesses);
+    }
+  },
+
+  checkWinCondition() { 
+    // makes fillInArray a string
+    var fillInWord = this.fillInArray.join('');
+    // compares chosen word against fillInArray word
+    if (this.theWord === fillInWord) {
+      return true;
+    } else {
+      return false;
     }
   },
 
   // Sets the gameState
   init() {
     // picks the word
-    this.pickWord();
+    this.initWord();
+    console.log('Game word: ', this.theWord);
     // sets the number of guesses
     this.initGuesses();
+    console.log('Number of guesses: ', this.guesses);
     // creates the array for theWord
     this.initWordAray(this.theWord);
+    console.log('Game word array: ', this.theWordArray);
     // creates the array for correctly guessed words
     this.initFillArray(this.theWordArray.length);
-    // console.log(this.fillInArray);
+    console.log('Fill in array: ', this.fillInArray);
   }
 
 }
@@ -129,5 +144,3 @@ var gameState = {
 // gameState.addGuesses();
 // gameState.setWordArray(gameState.theWord);
 gameState.init();
-console.log(gameState.theWordArray);
-console.log('Game word:', gameState.theWord);
