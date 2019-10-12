@@ -44,11 +44,13 @@ var gameState = {
 
   // Adds more guesses based off of the length of the goal word
   initGuesses() {
+    this.guesses = 7;
     this.guesses += this.theWord.length;
   },
 
   // populates theWordArray 
   initWordAray(word) {
+    this.theWordArray = [];
     // splits a word into individual characters
     // pushes them to theWordArray
     word.split('').forEach(c => {
@@ -58,6 +60,7 @@ var gameState = {
 
   // creates an array of underscores
   initFillArray(arrayLength) {
+    this.fillInArray = [];
     for (let i = 0; i < arrayLength; i++) {
       this.fillInArray.push('_');
     }
@@ -136,7 +139,16 @@ var gameState = {
     console.log('Game word array: ', this.theWordArray);
     // creates the array for correctly guessed words
     this.initFillArray(this.theWordArray.length);
-    console.log('Fill in array: ', this.fillInArray);
+    console.log('Fill in array: ', this.fillInArray);    
+  },
+
+  // resets the game upon a win
+  newGame() {
+    alert('YOU WON, SON');
+    this.wins++;
+    this.init();
+    this.guessedLetters = [];
+    this.update();
   },
 
   update() {
@@ -156,18 +168,19 @@ var gameState = {
 
     // onkeyup event to capture key input
     document.onkeyup = function (event) {
-
+      // gets the key code from the onkeyup event
       var guessCode = event.keyCode;
       // if statement to make sure a letter was pressed
       // if a letter is pressed, update gameState and HTML
       if (guessCode >= 65 && guessCode <= 90) {
         console.log('input was a letter');
+        // forces lower case for consistency
         var guess = String.fromCharCode(guessCode).toLowerCase();
         console.log('Guess: ', guess);
+        // handles the guessed letter
         gameState.addGuess(guess);
 
-        // updates HTML after pressing a key, for whatever reason will not
-        // work with the this keyword
+        // updates HTML after pressing a key, has to use gameState because it is a nested function
         fillArrayDisplay.innerHTML = gameState.fillInArray.join(' ');
         guessArrayDisplay.innerHTML = gameState.guessedLetters.join(', ');
         guessCount.innerHTML = 'Remaining guesses: ' + gameState.guesses;
@@ -176,8 +189,19 @@ var gameState = {
       } else {
         console.log('input was not a letter');
       }
+
+      //--------------------------------------------
+      // update win condition logic. make sure that 
+      //there is lose condition logic too! look at
+      // functions newGame(), the if statement below
+      // and initialization functions
+      //--------------------------------------------
+      if (gameState.checkWinCondition()) {
+        gameState.newGame();
+      }
+      console.log('Win condition: ', gameState.checkWinCondition());
     }
-  }
+  },
 }
 
 // Initialize gameState
@@ -185,5 +209,3 @@ gameState.init();
 
 // updates gameState
 gameState.update();
-
-// Debug statement, making sure gameState is picking a word
