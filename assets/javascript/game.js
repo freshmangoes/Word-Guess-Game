@@ -144,8 +144,6 @@ var gameState = {
 
   // resets the game upon a win
   newGame() {
-    alert('YOU WON, SON');
-    this.wins++;
     this.init();
     this.guessedLetters = [];
     this.update();
@@ -153,14 +151,12 @@ var gameState = {
 
   update() {
     // get elements to be modified and set them to variables
-    var targetWord = document.getElementById('target-word');
     var fillArrayDisplay = document.getElementById('fill-display');
     var winCount = document.getElementById('win-count');
     var guessCount = document.getElementById('guess-count');
     var guessArrayDisplay = document.getElementById('guess-display');
 
     // populating HTML with gameState data
-    targetWord.innerHTML = this.theWord;
     fillArrayDisplay.innerHTML = this.fillInArray.join(' ');
     guessArrayDisplay.innerHTML = this.guessedLetters.join(', ');
     winCount.innerHTML = 'Win Count: ' + this.wins;
@@ -182,8 +178,19 @@ var gameState = {
 
         // updates HTML after pressing a key, has to use gameState because it is a nested function
         fillArrayDisplay.innerHTML = gameState.fillInArray.join(' ');
-        guessArrayDisplay.innerHTML = gameState.guessedLetters.join(', ');
+        guessArrayDisplay.innerHTML = 'Guessed letters: ' + gameState.guessedLetters.join(', ');
         guessCount.innerHTML = 'Remaining guesses: ' + gameState.guesses;
+
+        if (gameState.guesses >= 1 && gameState.checkWinCondition()) {
+          gameState.wins++;
+          alert('Winner winner chicken dinner!')
+          alert('The word was ' + gameState.theWord);
+          gameState.newGame();
+        }else if(gameState.guesses < 1 && !gameState.checkWinCondition()) {
+          alert('Oh no, you lost :(')
+          gameState.wins = 0;
+          gameState.newGame();
+        }
 
         // do not update gameState and HTML if letter was not pressed
       } else {
@@ -196,9 +203,6 @@ var gameState = {
       // functions newGame(), the if statement below
       // and initialization functions
       //--------------------------------------------
-      if (gameState.checkWinCondition()) {
-        gameState.newGame();
-      }
       console.log('Win condition: ', gameState.checkWinCondition());
     }
   },
