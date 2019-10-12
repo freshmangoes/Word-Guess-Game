@@ -138,5 +138,10 @@ var gameState = {
 
 }
 
+// onkeyup event to capture key input
+document.onkeyup = function(event) {
+
+}
+
 // Debug statement, making sure gameState is picking a word
 gameState.init();
