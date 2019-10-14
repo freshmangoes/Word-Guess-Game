@@ -88,7 +88,7 @@ var gameState = {
 
   addGuess(letter) {
     // case for already guessed letter
-    if (this.fillInArray.includes(letter)) {
+    if (this.fillInArray.includes(letter) || this.guessedLetters.includes(letter)) {
       console.log('Already guessed', letter);
       // case for correct guess
     } else if (this.theWordArray.includes(letter)) {
