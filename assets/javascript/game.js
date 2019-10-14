@@ -75,7 +75,7 @@ var gameState = {
     if (correctIndicies.length != 1) {
       // iterate
       for (var i = 0; i < correctIndicies.length; i++) {
-        console.log('setFillArray - correctIndicies: ', correctIndicies);
+        // console.log('setFillArray - correctIndicies: ', correctIndicies);
         // get the index by taking the value of the current iteration
         var index = correctIndicies[i];
         // set fill array at that index to the answer array at that index
@@ -101,22 +101,22 @@ var gameState = {
       this.setFillArray(letter, this.theWordArray, this.fillInArray);
       // subtract one from guesses
       this.guesses = this.guesses - 1;
-      console.log('Remaining guesses: ', this.guesses);
+      // console.log('Remaining guesses: ', this.guesses);
       this.guessedLetters.sort();
       // case for incorrect guesses
     } else {
       console.log('Chosen word does not contain this character:', letter);
       // push letter to guessed array
       this.guessedLetters.push(letter);
-      console.log('Guessed letters: ', this.guessedLetters);
+      // console.log('Guessed letters: ', this.guessedLetters);
       // subtract one from guesses
       this.guesses = this.guesses - 1;
-      console.log('Remaining guesses: ', this.guesses);
+      // console.log('Remaining guesses: ', this.guesses);
       this.guessedLetters.sort();
     }
-
-    console.log('gameState.fillInArray: ', gameState.fillInArray);
-    console.log('gameState.guessedLetters: ', gameState.guessedLetters);
+// 
+    // console.log('gameState.fillInArray: ', gameState.fillInArray);
+    // console.log('gameState.guessedLetters: ', gameState.guessedLetters);
 
   },
 
@@ -135,16 +135,16 @@ var gameState = {
   init() {
     // picks the word
     this.initWord();
-    console.log('Game word: ', this.theWord);
+    // console.log('Game word: ', this.theWord);
     // sets the number of guesses
     this.initGuesses();
-    console.log('Number of guesses: ', this.guesses);
+    // console.log('Number of guesses: ', this.guesses);
     // creates the array for theWord
     this.initWordAray(this.theWord);
-    console.log('Game word array: ', this.theWordArray);
+    // console.log('Game word array: ', this.theWordArray);
     // creates the array for correctly guessed words
     this.initFillArray(this.theWordArray.length);
-    console.log('Fill in array: ', this.fillInArray);
+    // console.log('Fill in array: ', this.fillInArray);
   },
 
   // resets the game upon a win
@@ -205,7 +205,7 @@ var gameState = {
       } else {
         console.log('input was not a letter');
       }
-      console.log('Win condition: ', gameState.checkWinCondition());
+      // console.log('Win condition: ', gameState.checkWinCondition());
     }
   },
 }
