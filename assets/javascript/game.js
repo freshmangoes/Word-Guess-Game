@@ -1,4 +1,6 @@
 // auxiliary functions
+// function to get indicies of correct guess if multiple occurances of letter
+// takes in an array, and a value. searches through the array for the value.
 function getIndex(array, value) {
   // array to store index values
   var indicies = [];
