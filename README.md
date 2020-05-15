@@ -8,3 +8,6 @@ Made with vanilla HTML/CSS and Javascript.
 
 - DOM manipulation achieved with document.getElementById() and #element.innerHTML().
 - Word guess by typing achieved by document.onkeyup and checking the range of keycodes for validation
+
+# Instructions  
+Clone the repo and open index.html in your web browser!
